@@ -62,7 +62,6 @@ public class GameManager : NetworkBehaviour {
                     gameState = GameState.Starting;
                     controlFlag = false;
                 }
-
                 break;
 
             case GameState.Starting:
@@ -134,6 +133,8 @@ public class GameManager : NetworkBehaviour {
         Transform spawnPoint = GameObject.Find("BallSpawnPoint").transform;
         Instantiate(ball);
         ball.transform.position = spawnPoint.position;
-        ball.GetComponent<Rigidbody2D>().AddForce(directions[Random.Range(0, directions.Length)] * 10);
+        BallMovement bm = ball.GetComponent<BallMovement>();
+        bm.direction = directions[Random.Range(0, directions.Length)].normalized;
+        bm.speed = 2f;
     }
 }
